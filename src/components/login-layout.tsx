@@ -9,7 +9,7 @@ export function LoginLayout() {
           <img src={LogoIconLight} className="h-10 w-10" alt="Logo help desk" />
           <h1 className="font-bold text-brand-dark text-3xl">HelpDesk</h1>
         </div>
-        <div className="md:min-w-[500px] flex justify-center items-center">
+        <div className="md:min-w-[500px] ">
           <Outlet />
         </div>
       </div>
