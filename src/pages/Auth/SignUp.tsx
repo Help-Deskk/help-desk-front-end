@@ -1,36 +1,48 @@
 import { useNavigate } from "react-router";
-import { Button } from "../components/button";
-import { Input } from "../components/input";
-import { useForm } from "react-hook-form";
-import { signInSchema, type SignInFormSchema } from "../schemas/authSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
 
-export function SignIn() {
+import { Input } from "../../components/Input";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signUpSchema, type SignUpFormSchema } from "../../schemas/authSchema";
+import { Button } from "../../components/Button";
+
+export function SignUp() {
   const navigate = useNavigate();
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<SignInFormSchema>({
-    resolver: zodResolver(signInSchema),
+  } = useForm<SignUpFormSchema>({
+    resolver: zodResolver(signUpSchema),
   });
 
-  function onSubmit(data: SignInFormSchema) {
+  function onSubmit(data: SignUpFormSchema) {
     console.log(data);
   }
   return (
     <div>
       <div className="flex flex-col border border-gray-500 p-8 mb-5">
         <header className="mb-5">
-          <h2 className="font-bold text-2xl mt-2">Acesse o portal</h2>
+          <h2 className="font-bold text-2xl mt-2">Crie sua conta</h2>
           <p className="text-gray-300 text-sm">
-            Entre usando seu e-mail e senha cadastrados
+            Crie usando seu nome, e-mail e senha
           </p>
         </header>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-4  mb-5">
             <Input
-              label="Email"
+              label="Nome"
+              placeholder="Digite o nome completo"
+              {...register("name")}
+            />
+            {errors.name?.message && (
+              <p className="text-[12px] text-feedback-danger -mt-2">
+                {errors.name.message}
+              </p>
+            )}
+
+            <Input
+              label="E-mail"
               placeholder="exemplo@email.com"
               {...register("email")}
             />
@@ -39,6 +51,7 @@ export function SignIn() {
                 {errors.email.message}
               </p>
             )}
+
             <Input
               label="Senha"
               placeholder="exemplo@email.com"
@@ -53,11 +66,11 @@ export function SignIn() {
           <Button variant="black">Entrar</Button>
         </form>
       </div>
-      <div className="flex flex-col border border-gray-500 p-8 ">
-        <h3 className="font-bold text-2xl mt-2">Ainda não tem uma conta?</h3>
-        <p className="text-gray-300 text-sm mb-5">Cadastre-se agora mesmo</p>
-        <Button onClick={() => navigate("/signup")} variant="light">
-          Cadastre-se
+      <div className="flex flex-col border border-gray-500 p-8">
+        <h3 className="font-bold text-2xl mt-2">Já tem uma conta?</h3>
+        <p className="text-gray-300 text-sm mb-5">Entre agora mesmo</p>
+        <Button onClick={() => navigate("/")} variant="light">
+          Acessar conta
         </Button>
       </div>
     </div>
