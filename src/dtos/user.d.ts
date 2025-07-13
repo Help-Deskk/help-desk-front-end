@@ -2,9 +2,8 @@ type UserAPIRole = "admin" | "customer" | "technician";
 
 type UserAPIResponse = {
   token: string;
-  user: {
+  resouce_owner: {
     id: string;
-    name:string
     email: string;
     role: UserAPIRole;
   };
