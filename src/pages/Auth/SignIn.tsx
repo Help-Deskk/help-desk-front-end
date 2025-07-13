@@ -23,9 +23,11 @@ export function SignIn() {
   });
 
   async function onSubmit(data: SignInFormSchema) {
+    console.log(data);
+    
     try {
       setIsLoading(true);
-      const response = await api.post("/users/sign_in", data);
+      const response = await api.post("/users/tokens/sign_in", data);
       console.log(response);
       toast.success(`Bem vindo`);
       save(response.data);

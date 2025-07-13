@@ -27,7 +27,7 @@ export function SignUp() {
     
     try {
       setIsLoading(true);
-      const response = await api.post("/users/sign_up", data);
+      const response = await api.post("/users/tokens/sign_up", data);
       console.log(response.data);
       if (response.status === 201) {
         toast.success("Usuário criado com sucesso!", {
