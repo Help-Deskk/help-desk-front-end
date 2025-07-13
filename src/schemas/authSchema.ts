@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { coerce } from "zod";
 
 export const signUpSchema = z.object({
   email: z
@@ -14,6 +14,7 @@ export const signUpSchema = z.object({
     .string()
     .min(1, { message: "Informe a senha" })
     .min(6, { message: "Senha deve ter pelo menos 6 caracteres" }),
+    role: z.coerce.number()
 });
 
 export type SignUpFormSchema = z.infer<typeof signUpSchema>;

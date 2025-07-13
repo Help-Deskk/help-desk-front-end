@@ -23,9 +23,11 @@ export function SignUp() {
   });
 
   async function onSubmit(data: SignUpFormSchema) {
+    console.log(data);
+    
     try {
       setIsLoading(true);
-      const response = await api.post("/users/sign-up", data);
+      const response = await api.post("/users/sign_up", data);
       console.log(response.data);
       if (response.status === 201) {
         toast.success("Usuário criado com sucesso!", {
@@ -86,6 +88,12 @@ export function SignUp() {
             {errors.password?.message && (
               <p className="text-[12px] text-feedback-danger -mt-2">
                 {errors.password.message}
+              </p>
+            )}
+            <Input label="role" type="number" {...register("role")}/>
+            {errors.role?.message && (
+              <p className="text-[12px] text-feedback-danger -mt-2">
+                {errors.role.message}
               </p>
             )}
           </div>
