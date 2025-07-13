@@ -15,7 +15,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   function save(data: UserAPIResponse) {
     localStorage.setItem(
       `${LOCAL_STORAGE_KEY}:user`,
-      JSON.stringify(data.resouce_owner)
+      JSON.stringify(data.resource_owner)
     );
     localStorage.setItem(`${LOCAL_STORAGE_KEY}:token`, data.token);
 
@@ -25,7 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const user = localStorage.getItem(`${LOCAL_STORAGE_KEY}:user`);
     const token = localStorage.getItem(`${LOCAL_STORAGE_KEY}:token`);
     if (token && user) {
-      setSession({ token, resouce_owner: JSON.parse(user) });
+      setSession({ token, resource_owner: JSON.parse(user) });
     }
     setIsLoading(false);
   }

@@ -9,7 +9,7 @@ import { useAuth } from "../hooks/useAuth";
 export function AppRoutes() {
   const { session } = useAuth();
   function Route() {
-    switch (session?.resouce_owner.role) {
+    switch (session?.resource_owner.role) {
       case "admin":
         return <AdminRoutes />;
       case "technician":
