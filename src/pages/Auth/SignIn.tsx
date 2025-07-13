@@ -25,11 +25,10 @@ export function SignIn() {
   async function onSubmit(data: SignInFormSchema) {
     try {
       setIsLoading(true);
-      const response = await api.post("/users", data);
+      const response = await api.post("/users/sign_in", data);
       console.log(response);
-
       toast.success(`Bem vindo`);
-      // save(response.data);
+      save(response.data);
     } catch (error) {
       console.log(error);
       if (error instanceof AxiosError) {

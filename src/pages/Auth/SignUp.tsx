@@ -8,9 +8,11 @@ import { AxiosError } from "axios";
 import { api } from "../../services/api";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
+import { useAuth } from "../../hooks/useAuth";
 
 export function SignUp() {
   const navigate = useNavigate();
+  const { save } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const {
     handleSubmit,
@@ -23,14 +25,12 @@ export function SignUp() {
   async function onSubmit(data: SignUpFormSchema) {
     try {
       setIsLoading(true);
-      const response = await api.post("/sign-up", data);
-      console.log(response);
-
+      const response = await api.post("/users/sign-up", data);
       if (response.status === 201) {
-        toast.success("Usuario criado com sucesso");
-        setTimeout(() => {
-          navigate(-1);
-        }, 1000);
+        toast.success("Usuário criado com sucesso!", {
+          onClose: () => navigate("/"),
+          autoClose: 2000,
+        });
       } else {
         throw new Error();
       }
@@ -88,7 +88,9 @@ export function SignUp() {
               </p>
             )}
           </div>
-          <Button type="submit" variant="black">Cadastrar</Button>
+          <Button type="submit" variant="black">
+            Cadastrar
+          </Button>
         </form>
       </div>
       <div className="flex flex-col border border-gray-500 p-8">

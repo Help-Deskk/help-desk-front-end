@@ -25,7 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const user = localStorage.getItem(`${LOCAL_STORAGE_KEY}:user`);
     const token = localStorage.getItem(`${LOCAL_STORAGE_KEY}:token`);
     if (token && user) {
-      setSession({ token, user: JSON.parse(user) });
+      setSession({ token, resouce_owner: JSON.parse(user) });
     }
     setIsLoading(false);
   }

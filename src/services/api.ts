@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL:'api.helpdeskapp.site'
+  baseURL:'https://api.helpdeskapp.site'
 })
