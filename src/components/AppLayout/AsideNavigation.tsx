@@ -39,11 +39,11 @@ export function AsideNavigation() {
           }`}
         >
           <item.icon
-            size={30}
+            size={20}
             color={`${activeItem === item.id ? "#ffffff" : "#858b99"}`}
           />
           <span
-            className={`text-2xl ${
+            className={`text-xl ${
               activeItem === item.id ? "text-white" : "text-gray-400"
             }`}
           >

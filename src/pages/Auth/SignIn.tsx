@@ -4,9 +4,16 @@ import { Input } from "../../components/Input";
 import { useForm } from "react-hook-form";
 import { signInSchema, type SignInFormSchema } from "../../schemas/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { api } from "../../services/api";
+import { toast, ToastContainer } from "react-toastify";
+import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { AxiosError } from "axios";
 
 export function SignIn() {
   const navigate = useNavigate();
+  const { save } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     handleSubmit,
     register,
@@ -15,8 +22,23 @@ export function SignIn() {
     resolver: zodResolver(signInSchema),
   });
 
-  function onSubmit(data: SignInFormSchema) {
-    console.log(data);
+  async function onSubmit(data: SignInFormSchema) {
+    try {
+      setIsLoading(true);
+      const response = await api.post("/users", data);
+      console.log(response);
+
+      toast.success(`Bem vindo`);
+      // save(response.data);
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        return toast.error(error.response?.data.message);
+      }
+      return toast.error("Email ou senha inválidos");
+    } finally {
+      setIsLoading(false);
+    }
   }
   return (
     <div>
@@ -60,6 +82,7 @@ export function SignIn() {
           Cadastre-se
         </Button>
       </div>
+      <ToastContainer position="bottom-right" theme="colored" />
     </div>
   );
 }

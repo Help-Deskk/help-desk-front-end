@@ -5,9 +5,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema, type SignUpFormSchema } from "../../schemas/authSchema";
 import { Button } from "../../components/Button";
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import { AxiosError } from "axios";
+import { api } from "../../services/api";
 
 export function SignUp() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     handleSubmit,
     register,
@@ -16,8 +21,29 @@ export function SignUp() {
     resolver: zodResolver(signUpSchema),
   });
 
-  function onSubmit(data: SignUpFormSchema) {
-    console.log(data);
+  async function onSubmit(data: SignUpFormSchema) {
+    try {
+      setIsLoading(true);
+      const response = await api.post("/sign-up", data);
+      console.log(response);
+
+      if (response.status === 201) {
+        toast.success("Usuario criado com sucesso");
+        setTimeout(() => {
+          navigate(-1);
+        }, 1000);
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        return toast.error(error.response?.data.message);
+      }
+      return toast.error("Email ou senha inválidos");
+    } finally {
+      setIsLoading(false);
+    }
   }
   return (
     <div>
@@ -63,7 +89,7 @@ export function SignUp() {
               </p>
             )}
           </div>
-          <Button variant="black">Entrar</Button>
+          <Button type="submit" variant="black">Cadastrar</Button>
         </form>
       </div>
       <div className="flex flex-col border border-gray-500 p-8">
@@ -73,6 +99,7 @@ export function SignUp() {
           Acessar conta
         </Button>
       </div>
+      <ToastContainer position="bottom-right" theme="colored" />
     </div>
   );
 }
