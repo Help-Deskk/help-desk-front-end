@@ -16,8 +16,8 @@ export function AppLayout() {
           <div className="flex items-center gap-4 border-b border-b-gray-300 p-10">
             <img src={LogoIconLight} alt="Logo Help-Desk" />
             <div>
-              <h1 className="text-gray-600 text-4xl">Help Desk</h1>
-              <span className="text-brand-light font-semibold text-lg">
+              <h1 className="text-gray-600 text-2xl">Help Desk</h1>
+              <span className="text-brand-light font-semibold text-md">
                 ADMIN
               </span>
             </div>
