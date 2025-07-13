@@ -32,4 +32,4 @@ export function Button({
     </button>
   );
 }
-//` bg-black text-white  ${variants[variant]}`
+
