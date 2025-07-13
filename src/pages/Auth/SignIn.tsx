@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router";
-import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
 import { useForm } from "react-hook-form";
 import { signInSchema, type SignInFormSchema } from "../../schemas/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,6 +7,8 @@ import { toast, ToastContainer } from "react-toastify";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { AxiosError } from "axios";
+import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
 
 export function SignIn() {
   const navigate = useNavigate();

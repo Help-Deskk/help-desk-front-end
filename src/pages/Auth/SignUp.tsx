@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router";
-
-import { Input } from "../../components/Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema, type SignUpFormSchema } from "../../schemas/authSchema";
-import { Button } from "../../components/Button";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { AxiosError } from "axios";
 import { api } from "../../services/api";
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
 
 export function SignUp() {
   const navigate = useNavigate();
