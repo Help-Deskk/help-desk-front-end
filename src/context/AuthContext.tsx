@@ -15,7 +15,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   function save(data: UserAPIResponse) {
     localStorage.setItem(
       `${LOCAL_STORAGE_KEY}:user`,
-      JSON.stringify(data.user)
+      JSON.stringify(data.resouce_owner)
     );
     localStorage.setItem(`${LOCAL_STORAGE_KEY}:token`, data.token);
 
