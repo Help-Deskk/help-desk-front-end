@@ -10,14 +10,14 @@ export function NewTechnician() {
 
   return (
     <div className="max-w-6xl h-full mx-auto py-10">
-      <header className="flex justify-between">
+      <header className="flex justify-between items-center ">
         <div className="flex flex-col gap-2">
           <MoveLeft />
           <h1 className="text-4xl text-brand-dark">Perfil de técnico</h1>
         </div>
         <div className="flex gap-2">
-          <Button variant="light">Cancelar</Button>
-          <Button variant="black">Salvar</Button>
+          <Button variant="light" className="h-15">Cancelar</Button>
+          <Button variant="black" className="h-15">Salvar</Button>
         </div>
       </header>
 
