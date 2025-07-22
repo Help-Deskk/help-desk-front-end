@@ -12,13 +12,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Plus } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const MOCK_TECHNICIANS: TechnicianAPIResponse[] = [
   {
     id: "1",
     name: "João Silva",
     email: "joao.silva@helpdesk.com",
-    disponibility: ["08:00", "09:00", "10:00","10:00", "10:00"],
+    disponibility: ["08:00", "09:00", "10:00", "10:00", "10:00"],
   },
   {
     id: "2",
@@ -105,6 +106,8 @@ export function Technician() {
   const [technician, setTechnician] = useState<TechnicianAPIResponse[] | null>(
     MOCK_TECHNICIANS
   );
+
+  const navigate = useNavigate();
   async function fetchTechnician() {
     setIsLoading(true);
     try {
@@ -123,8 +126,11 @@ export function Technician() {
     <div>
       <header className="mb-10 flex justify-between">
         <h1 className="text-4xl text-brand-dark">Técnicos</h1>
-        <Button className="cursor-pointer py-6 w-40">
-          <Plus/>
+        <Button
+          className="cursor-pointer py-6 w-40"
+          onClick={() => navigate("/technician/new")}
+        >
+          <Plus />
           <span>Novo</span>
         </Button>
       </header>

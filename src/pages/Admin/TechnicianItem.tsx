@@ -23,7 +23,7 @@ export function TechnicianItem({ data }: TechnicianItemProps) {
             <span className="flex items-center justify-center h-full text-gray-600 text-xl">
               {getInicial(data.name)}
             </span>
-          </div>
+          </div> 
           <h1 className="text-gray-200 text-lg font-semibold">{data.name}</h1>
         </div>
       </TableCell>
@@ -33,12 +33,12 @@ export function TechnicianItem({ data }: TechnicianItemProps) {
       <TableCell className="px-10 py-8 w-[30%] flex gap-2 items-center">
         <div>
           {data.disponibility.slice(0, 4).map((hour, i) => (
-            <span
-              className="p-4 rounded-full border-2 border-gray-400 mx-1"
+            <div
+              className="p-4 rounded-full border-2 border-gray-400 mx-1 inline-flex"
               key={i}
             >
               <span className=" text-gray-400">{hour}</span>
-            </span>
+            </div>
           ))}
         </div>
         {data.disponibility.length > 4 && (
