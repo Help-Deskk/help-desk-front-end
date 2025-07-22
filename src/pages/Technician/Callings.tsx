@@ -1,5 +1,7 @@
-export function CallingsTechnician(){
-  return <div>
-    <h1>dMeus chamados</h1>
-  </div>
+export function CallingsTechnician() {
+  return (
+    <div>
+      <h1>Meus chamados - Técnico</h1>
+    </div>
+  );
 }

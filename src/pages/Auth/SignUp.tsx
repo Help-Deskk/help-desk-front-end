@@ -82,7 +82,8 @@ export function SignUp() {
 
             <Input
               label="Senha"
-              placeholder="exemplo@email.com"
+              placeholder="******"
+              type="password"
               {...register("password")}
             />
             {errors.password?.message && (

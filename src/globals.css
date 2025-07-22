@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --color-*: initial;
   --color-brand-dark: #2e3da3;
   --color-brand-base: #5165e1;
   --color-brand-light: #8996eb;
@@ -25,6 +26,6 @@ select {
   font-family: "Lato", sans-serif;
 }
 
-.img{
-  background-image: url('../src/assets/Login_Background.png');
+.img {
+  background-image: url("../src/assets/Login_Background.png");
 }

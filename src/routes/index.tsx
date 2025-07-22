@@ -5,11 +5,15 @@ import { TechnicianRoutes } from "./TechnicianRoutes";
 import { CustomerRoutes } from "./CustomerRoutes";
 import { useAuth } from "../hooks/useAuth";
 
-
+export const EXEMPLE_SESSION  ={
+  user:{
+    role:'admin'
+  }
+}
 export function AppRoutes() {
-  const { session } = useAuth();
+  // const { session } = useAuth();
   function Route() {
-    switch (session?.resource_owner.role) {
+    switch (EXEMPLE_SESSION.user.role) {
       case "admin":
         return <AdminRoutes />;
       case "technician":

@@ -24,7 +24,7 @@ export function SignIn() {
 
   async function onSubmit(data: SignInFormSchema) {
     console.log(data);
-    
+
     try {
       setIsLoading(true);
       const response = await api.post("/users/tokens/sign_in", data);
@@ -64,7 +64,8 @@ export function SignIn() {
             )}
             <Input
               label="Senha"
-              placeholder="exemplo@email.com"
+              placeholder="*******"
+              type="password"
               {...register("password")}
             />
             {errors.password?.message && (

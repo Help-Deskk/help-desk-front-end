@@ -9,7 +9,7 @@ export function AdminRoutes() {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
-        <Route path="/calls" element={<Calls />} />
+        <Route path="/" element={<Calls />} />
         <Route path="/technician" element={<Technician />} />
         <Route path="/customers" element={<Customers />} />
         <Route path="/services" element={<Services />} />

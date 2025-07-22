@@ -1,27 +1,61 @@
-import { BriefcaseBusiness, ClipboardList, Users, Wrench } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  ClipboardList,
+  Plus,
+  Users,
+  Wrench,
+} from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useAuth } from "../../hooks/useAuth";
+import { EXEMPLE_SESSION } from "../../routes";
 
 export function AsideNavigation() {
   const [activeItem, setActiveItem] = useState("calls");
   const navigate = useNavigate();
-  const session = {
-    user: {
-      role: "",
-    },
-  };
+  // const { session } = useAuth();
 
-  const menuItems = [
-    { id: "calls", icon: ClipboardList, label: "Chamados", path: "/calls" },
-    { id: "technician", icon: Users, label: "Técnico", path: "/technician" },
+  const allMenus = [
+    {
+      id: "calls",
+      icon: ClipboardList,
+      label: "Chamados",
+      path: "/",
+      roles: ["admin", "technician", "custumer"],
+    },
+    {
+      id: "technician",
+      icon: Users,
+      label: "Técnico",
+      path: "/technician",
+      roles: ["admin"],
+    },
     {
       id: "customers",
       icon: BriefcaseBusiness,
       label: "Clientes",
       path: "/customers",
+      roles: ["admin"],
     },
-    { id: "services", icon: Wrench, label: "Serviços", path: "/services" },
+    {
+      id: "services",
+      icon: Wrench,
+      label: "Serviços",
+      path: "/services",
+      roles: ["admin"],
+    },
+    {
+      id: "create calls",
+      icon: Plus,
+      label: "Criar chamado",
+      path: "/new-call",
+      roles: ["custumer"],
+    },
   ];
+  const menuItens = allMenus.filter((item) =>
+    // item.roles.includes(String(session?.resource_owner.role))
+    item.roles.includes(String(EXEMPLE_SESSION.user.role))
+  );
 
   function handleClickItem(id: string, path: string) {
     setActiveItem(id);
@@ -30,7 +64,7 @@ export function AsideNavigation() {
 
   return (
     <ul className="p-8 flex flex-col gap-4">
-      {menuItems.map((item) => (
+      {menuItens.map((item) => (
         <li
           key={item.id}
           onClick={() => handleClickItem(item.id, item.path)}
@@ -44,7 +78,7 @@ export function AsideNavigation() {
           />
           <span
             className={`text-xl ${
-              activeItem === item.id ? "text-white" : "text-gray-400"
+              activeItem === item.id ? "text-gray-600" : "text-gray-400"
             }`}
           >
             {item.label}
