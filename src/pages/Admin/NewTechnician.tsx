@@ -1,19 +1,23 @@
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
-import { MoveLeft } from "lucide-react";
+import { ArrowLeft, MoveLeft, MoveLeftIcon } from "lucide-react";
 import { useState } from "react";
 import { TIME_PERIODS, TIME_PERIODS_KEYS } from "@/types/hours";
 import { useForm } from "react-hook-form";
 import { newTechnicianSchema } from "../../schemas/newTechnicianSchema";
 import type { NewTechnicianSchema } from "@/schemas/newTechnicianSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
 
 export function NewTechnician() {
   const [hoursAvailable, setHoursAvailable] = useState<string[]>([]);
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
   } = useForm<NewTechnicianSchema>({
     resolver: zodResolver(newTechnicianSchema),
   });
@@ -23,6 +27,9 @@ export function NewTechnician() {
       ...data,
       hoursAvailable: [...hoursAvailable],
     };
+    reset();
+    toast.success("Técnico criado com sucesso");
+    setHoursAvailable([]);
     console.log(newTechnician);
   }
 
@@ -30,7 +37,11 @@ export function NewTechnician() {
     <div className="max-w-6xl h-full mx-auto py-10">
       <header className="flex justify-between items-center ">
         <div className="flex flex-col gap-2">
-          <MoveLeft />
+          <ArrowLeft
+            strokeWidth={1.5}
+            onClick={() => navigate(-1)}
+            className="hover:cursor-pointer text-gray-300"
+          />
           <h1 className="text-4xl text-brand-dark">Perfil de técnico</h1>
         </div>
         <div className="flex gap-2">
@@ -55,7 +66,7 @@ export function NewTechnician() {
           <p className="text-gray-300 text-md mb-5">
             Defina as informações do perfil de técnico
           </p>
-          <form className="flex flex-col gap-5">
+          <form className="flex flex-col gap-6.5">
             <Input
               label="Nome"
               placeholder="Nome completo"
@@ -78,6 +89,7 @@ export function NewTechnician() {
             )}
             <Input
               label="Senha"
+              type="password"
               placeholder="Defina a senha de acesso"
               {...register("password")}
             />
@@ -88,6 +100,7 @@ export function NewTechnician() {
             )}
             <Input
               label="Confirme a senha"
+              type="password"
               placeholder="Repita a senha de acesso"
               {...register("confirmPassword")}
             />
@@ -145,6 +158,7 @@ export function NewTechnician() {
           </div>
         </section>
       </main>
+      <ToastContainer position="bottom-right" theme="colored" />
     </div>
   );
 }
