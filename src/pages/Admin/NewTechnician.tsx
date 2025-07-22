@@ -3,10 +3,28 @@ import { Button } from "../../components/Button";
 import { MoveLeft } from "lucide-react";
 import { useState } from "react";
 import { TIME_PERIODS, TIME_PERIODS_KEYS } from "@/types/hours";
+import { useForm } from "react-hook-form";
+import { newTechnicianSchema } from "../../schemas/newTechnicianSchema";
+import type { NewTechnicianSchema } from "@/schemas/newTechnicianSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export function NewTechnician() {
   const [hoursAvailable, setHoursAvailable] = useState<string[]>([]);
-  console.log(TIME_PERIODS_KEYS);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<NewTechnicianSchema>({
+    resolver: zodResolver(newTechnicianSchema),
+  });
+
+  async function onSubmit(data: NewTechnicianSchema) {
+    const newTechnician = {
+      ...data,
+      hoursAvailable: [...hoursAvailable],
+    };
+    console.log(newTechnician);
+  }
 
   return (
     <div className="max-w-6xl h-full mx-auto py-10">
@@ -16,8 +34,16 @@ export function NewTechnician() {
           <h1 className="text-4xl text-brand-dark">Perfil de técnico</h1>
         </div>
         <div className="flex gap-2">
-          <Button variant="light" className="h-15">Cancelar</Button>
-          <Button variant="black" className="h-15">Salvar</Button>
+          <Button variant="light" className="h-15">
+            Cancelar
+          </Button>
+          <Button
+            variant="black"
+            className="h-15"
+            onClick={handleSubmit(onSubmit)}
+          >
+            Salvar
+          </Button>
         </div>
       </header>
 
@@ -29,14 +55,47 @@ export function NewTechnician() {
           <p className="text-gray-300 text-md mb-5">
             Defina as informações do perfil de técnico
           </p>
-          <form action="" className="flex flex-col gap-5">
-            <Input label="Nome" placeholder="Nome completo" />
-            <Input label="E-mail" placeholder="exemple@mail.com" />
-            <Input label="Senha" placeholder="Defina a senha de acesso" />
+          <form className="flex flex-col gap-5">
+            <Input
+              label="Nome"
+              placeholder="Nome completo"
+              {...register("name")}
+            />
+            {errors.name?.message && (
+              <p className="text-[12px] text-feedback-danger -mt-2">
+                {errors.name.message}
+              </p>
+            )}
+            <Input
+              label="E-mail"
+              placeholder="exemple@mail.com"
+              {...register("email")}
+            />
+            {errors.email?.message && (
+              <p className="text-[12px] text-feedback-danger -mt-2">
+                {errors.email.message}
+              </p>
+            )}
+            <Input
+              label="Senha"
+              placeholder="Defina a senha de acesso"
+              {...register("password")}
+            />
+            {errors.password?.message && (
+              <p className="text-[12px] text-feedback-danger -mt-2">
+                {errors.password.message}
+              </p>
+            )}
             <Input
               label="Confirme a senha"
               placeholder="Repita a senha de acesso"
+              {...register("confirmPassword")}
             />
+            {errors.confirmPassword?.message && (
+              <p className="text-[12px] text-feedback-danger -mt-2">
+                {errors.confirmPassword.message}
+              </p>
+            )}
           </form>
         </section>
         <section className="p-6 border border-gray-500 rounded-xl">
@@ -52,10 +111,32 @@ export function NewTechnician() {
                 <span className="text-gray-300">
                   {TIME_PERIODS[time_period].label}
                 </span>
-                <ul className="">
+                <ul>
                   {TIME_PERIODS[time_period].hours.map((hour) => (
-                    <li className="p-4 rounded-full border-2 border-gray-400 mx-1 inline-flex mb-3 hover:opacity-80 hover:scale-105 transition ease-linear cursor-pointer">
-                      <span className="text-gray-400">{hour}</span>
+                    <li
+                      key={hour}
+                      className={`p-4 rounded-full border-2 border-gray-400 mx-1 inline-flex mb-3 hover:opacity-80 hover:scale-105 transition ease-linear cursor-pointer ${
+                        hoursAvailable.includes(hour)
+                          ? "bg-brand-base text-gray-500"
+                          : "bg-none"
+                      }`}
+                      onClick={() =>
+                        setHoursAvailable((prevHours) =>
+                          prevHours.includes(hour)
+                            ? prevHours.filter((h) => h !== hour)
+                            : [...prevHours, hour]
+                        )
+                      }
+                    >
+                      <span
+                        className={`${
+                          hoursAvailable.includes(hour)
+                            ? "text-gray-500"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {hour}
+                      </span>
                     </li>
                   ))}
                 </ul>
