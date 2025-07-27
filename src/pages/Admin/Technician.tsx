@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { Plus } from "lucide-react";
 import { useNavigate } from "react-router";
+// import type { TechExemple, } from "@/dtos/technician";
 
 const MOCK_TECHNICIANS: TechnicianAPIResponse[] = [
   {
@@ -103,15 +104,15 @@ const MOCK_TECHNICIANS: TechnicianAPIResponse[] = [
 
 export function Technician() {
   const [isLoading, setIsLoading] = useState(false);
-  const [technician, setTechnician] = useState<TechnicianAPIResponse[] | null>(
-    MOCK_TECHNICIANS
-  );
+  const [technician, setTechnician] = useState<
+    TechnicianAPIResponse[] | null
+  >(MOCK_TECHNICIANS);
 
   const navigate = useNavigate();
   async function fetchTechnician() {
     setIsLoading(true);
     try {
-      const response = await api.get("/technician");
+      const response = await api.get("/technicians");
       setTechnician(response.data);
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -121,6 +122,9 @@ export function Technician() {
       setIsLoading(false);
     }
   }
+  useEffect(() => {
+    // fetchTechnician()
+  },[])
 
   return (
     <div>

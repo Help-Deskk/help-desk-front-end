@@ -72,7 +72,7 @@ export function NewTechnician() {
               placeholder="Nome completo"
               {...register("name")}
             />
-            {errors.name?.message && (
+            {errors.name?.message && ( 
               <p className="text-[12px] text-feedback-danger -mt-2">
                 {errors.name.message}
               </p>

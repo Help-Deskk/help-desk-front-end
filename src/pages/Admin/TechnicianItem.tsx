@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
+// import type { TechExemple } from "@/dtos/technician";
 import { Edit2 } from "lucide-react";
 
 type TechnicianItemProps = {

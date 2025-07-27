@@ -8,12 +8,12 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
-import { EXEMPLE_SESSION } from "../../routes";
+// import { EXEMPLE_SESSION } from "../../routes";
 
 export function AsideNavigation() {
   const [activeItem, setActiveItem] = useState("calls");
   const navigate = useNavigate();
-  // const { session } = useAuth();
+  const { session } = useAuth();
 
   const allMenus = [
     {
@@ -53,8 +53,8 @@ export function AsideNavigation() {
     },
   ];
   const menuItens = allMenus.filter((item) =>
-    // item.roles.includes(String(session?.resource_owner.role))
-    item.roles.includes(String(EXEMPLE_SESSION.user.role))
+    item.roles.includes(String(session?.resource_owner.role))
+    // item.roles.includes(String(EXEMPLE_SESSION.user.role))
   );
 
   function handleClickItem(id: string, path: string) {
