@@ -91,7 +91,7 @@ export function SignUp() {
                 {errors.password.message}
               </p>
             )}
-            <Input label="role" type="number" {...register("role")}/>
+            
             {errors.role?.message && (
               <p className="text-[12px] text-feedback-danger -mt-2">
                 {errors.role.message}
