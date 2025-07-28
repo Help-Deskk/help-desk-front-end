@@ -5,7 +5,6 @@ import { TechnicianRoutes } from "./TechnicianRoutes";
 import { CustomerRoutes } from "./CustomerRoutes";
 import { useAuth } from "../hooks/useAuth";
 
-
 export function AppRoutes() {
   const { session } = useAuth();
   function Route() {

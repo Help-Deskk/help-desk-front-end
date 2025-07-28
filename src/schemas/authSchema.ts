@@ -3,7 +3,7 @@ import z, { coerce } from "zod";
 export const signUpSchema = z.object({
   email: z
     .string()
-    .email({ message: "Informe um e-0mail válido" })
+    .email({ message: "Informe um e-mail válido" })
     .min(1, { message: "Informe o e-mail" }),
   name: z
     .string()

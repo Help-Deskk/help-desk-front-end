@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
+import { api } from "../services/api";
 
 type AuthContext = {
   isLoading: boolean;
@@ -27,6 +28,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (token && user) {
       setSession({ token, resource_owner: JSON.parse(user) });
     }
+    api.defaults.headers.common[`Authorization`] = `Bearer ${token}`;
     setIsLoading(false);
   }
 

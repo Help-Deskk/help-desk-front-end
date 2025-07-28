@@ -35,7 +35,7 @@ export function AppLayout() {
         </footer>
       </div>
 
-      <div className="p-10 w-full bg-gray-500 mt-3 rounded-tl-xl">
+      <div className="p-10 w-full bg-gray-600 mt-3 rounded-tl-xl">
         <Outlet />
       </div>
     </div>

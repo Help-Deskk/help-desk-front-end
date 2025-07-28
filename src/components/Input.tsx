@@ -14,7 +14,7 @@ export function Input({ type = "text", label, ...props }: InputProps) {
         id={label}
         type={type}
         {...props}
-        className="border-b border-gray-500 outline-none p-1"
+        className="border-b border-gray-500 outline-none p-1 text-xl"
       />
     </div>
   );
